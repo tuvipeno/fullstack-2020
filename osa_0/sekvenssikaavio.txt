@@ -1,0 +1,23 @@
+Selain->Palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+Palvelin-->Selain: redirect /exampleapp/notes
+note over Palvelin:
+Palvelin lähettää uudelleenohjauksen
+notes-sivustolle
+end note
+Selain->Palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+Palvelin-->Selain: HTML-koodi
+note over Selain:
+Selain alkaa suorittaa
+HTML-koodia
+end note
+Selain->Palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+Palvelin-->Selain: main.css
+Selain->Palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+Palvelin-->Selain: main.js
+note over Selain:
+Aletaan suorittaa js-koodia
+end note
+Selain->Palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+Palvelin-->Selain: [{"content":"test","date":"2020-08-31T23:32:59.677Z"},...]
+Selain->Palvelin: HTTP GET https://studies.cs.helsinki.fi/favicon.ico
+Palvelin-->Selain: HTML-koodi
