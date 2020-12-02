@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/contacts/
+Content-Type: application/json
+
+{
+    "name": "Aku Hanhi",
+    "number": "044-1298375"
+}
