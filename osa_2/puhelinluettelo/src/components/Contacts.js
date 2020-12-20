@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Persons = ({ person, deleteContact }) => {
+const Contacts = ({ person, deleteContact }) => {
   return (
     <li>
       {person.name} {person.number}
@@ -18,4 +18,4 @@ const Persons = ({ person, deleteContact }) => {
   //)
 //}
 
-export default Persons
+export default Contacts

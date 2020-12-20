@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import PersonForm from './components/PersonForm'
-import Persons from './components/Persons'
+import Persons from './components/Contacts'
 import Filter from './components/Filter'
-import noteService from './services/notes'
+import contactService from './services/contacts'
 
 
 
@@ -15,7 +15,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
-    noteService
+    contactService
       .getAll()
       .then(response => {
         setPersons(response.data)
@@ -50,7 +50,7 @@ const App = () => {
         number: newNumber
     }
 
-    noteService
+    contactService
       .create(person)
       .then(response => {
         setPersons(persons.concat(response.data))
@@ -65,6 +65,12 @@ const App = () => {
           setNotification(null)
         }, 5000)
       })
+      .catch(error => {
+        setErrorMessage(error.response.data.error)
+      })
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
 
   const handleNewName = (event) => {
@@ -89,7 +95,7 @@ const App = () => {
   const handleUpdate = (p, newNumber) => {
     const changedContact = {...p, number: newNumber}
 
-    noteService
+    contactService
       .update(p.id, changedContact)
       .then(returnedContact => {
         setPersons(persons.map(person => person.id !== p.id ? person : returnedContact))
@@ -97,11 +103,11 @@ const App = () => {
         setNewName('')
         setNewNumber('')
 
-        setErrorMessage(
+        setNotification(
           `Number updated for ${p.name}`
         )
         setTimeout(() => {
-          setErrorMessage(null)
+          setNotification(null)
         }, 5000)
       })
       .catch(error => {
@@ -117,9 +123,8 @@ const App = () => {
   }
   
   const handleDelete = (id, name) => {
-    console.log(persons)
     if (window.confirm(`Delete ${name}?`))
-      noteService
+      contactService
         .remove(id)
         .then(response => {
           setPersons(persons.filter(person => person.id !== id))
